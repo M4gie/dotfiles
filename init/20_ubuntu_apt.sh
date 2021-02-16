@@ -32,7 +32,6 @@ apt_packages+=(
   git-core
   htop
   python-pip
-  telnet
   tree
 )
 
@@ -85,7 +84,6 @@ if is_ubuntu_desktop; then
     shutter
     unity-tweak-tool
     vlc
-    xclip
   )
 
   # Manage online accounts via "gnome-control-center" in launcher

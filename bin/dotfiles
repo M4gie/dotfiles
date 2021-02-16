@@ -510,7 +510,6 @@ backup=
 # Execute code for each file in these subdirectories.
 do_stuff copy
 do_stuff link
-do_stuff config
 do_stuff init
 
 # Alert if backups were made.
