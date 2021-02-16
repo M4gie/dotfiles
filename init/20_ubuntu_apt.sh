@@ -5,6 +5,7 @@ apt_keys=()
 apt_source_files=()
 apt_source_texts=()
 apt_packages=()
+snap_packages=()
 deb_installed=()
 deb_sources=()
 
@@ -27,27 +28,16 @@ function add_ppa() {
 apt_packages+=(
   build-essential
   curl
-  docker.io
   docker-compose
   git-core
-  htop
   python-pip
-  tree
 )
-
-apt_packages+=(emacs)
 
 # https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-16-04
 add_ppa ppa:ansible/ansible
 apt_packages+=(ansible)
 
 if is_ubuntu_desktop; then
-
-  # https://github.com/tagplus5/vscode-ppa
-  apt_keys+=(https://tagplus5.github.io/vscode-ppa/ubuntu/gpg.key)
-  apt_source_files+=(vscode.list)
-  apt_source_texts+=("deb https://tagplus5.github.io/vscode-ppa/ubuntu ./")
-  apt_packages+=(code)
 
   # https://www.ubuntuupdates.org/ppa/google_chrome
   apt_keys+=(https://dl-ssl.google.com/linux/linux_signing_key.pub)
@@ -65,13 +55,10 @@ if is_ubuntu_desktop; then
 
   # Misc
   apt_packages+=(
-    chromium-browser
     fonts-mplus
     gnome-tweak-tool
     openssh-server
-    shutter
     unity-tweak-tool
-    vlc
     zsh
     fd-find
     filezilla
@@ -89,10 +76,23 @@ if is_ubuntu_desktop; then
   #   sudo sed -i'' "s/Specification.all = nil/Specification.reset/" /usr/lib/ruby/vendor_ruby/vagrant/bundler.rb
   # }
 
-  # https://discordapp.com/download
-  deb_installed+=(/usr/bin/discord)
-  deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
 
+  snap_packages+=(
+    "emacs --classic"
+    "discord"
+    "teams"
+    "telegram-desktop"
+    "postman"
+    "vlc"
+    "audacity"
+    "geforcenow"
+    "code --classic"
+    "shutter"
+    "chromium"
+    "docker"
+    "tree"
+    "htop"
+  )
 fi
 
 
@@ -164,11 +164,23 @@ if (( ${#apt_packages[@]} > 0 )); then
   done
 fi
 
+# Install Snap packages.
+if (( ${#snap_packages[@]} > 0 )); then
+  echo "Installing APT packages (${#snap_packages[@]})"
+  for package in "${snap_packages[@]}"; do
+    echo "$package"
+    [[ "$(type -t preinstall_$package)" == function ]] && preinstall_$package
+    sudo snap install "$package" && \
+    [[ "$(type -t postinstall_$package)" == function ]] && postinstall_$package
+  done
+fi
+
 # Switch to zsh
 chsh -s $(which zsh)
 
 # Set Oh-My-Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
 
 # Install debs via dpkg
 function __temp() { [[ ! -e "$1" ]]; }
