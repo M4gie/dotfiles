@@ -27,3 +27,6 @@ function watchfile() {
 function watchdir() {
   yarn watch --testPathPattern "$(dirname "$(get_last_modified_js_file_recursive)")"
 }
+
+alias na="node ace"
+alias y="yarn"

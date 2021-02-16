@@ -1,3 +1,17 @@
+export ZSH="/home/m4gie/.oh-my-zsh"
+
+ZSH_THEME="robbyrussell"
+
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
+
+alias ne='emacs -nw'
+
+alias kikimeter="git ls-files | xargs -n1 git blame --line-porcelain | sed -n 's/^author //p' | sort -f | uniq -ic | sort -nr"
+
+alias fd="fdfind --hidden --ignore-case"
+
 # Where the magic happens.
 export DOTFILES=~/.dotfiles
 

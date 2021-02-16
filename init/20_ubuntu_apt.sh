@@ -41,25 +41,13 @@ apt_packages+=(emacs)
 add_ppa ppa:ansible/ansible
 apt_packages+=(ansible)
 
-# https://launchpad.net/~hnakamur/+archive/ubuntu/tmux
-add_ppa ppa:hnakamur/tmux
-
-# https://github.com/greymd/tmux-xpanes
-add_ppa ppa:greymd/tmux-xpanes
-apt_packages+=(tmux-xpanes)
-
 if is_ubuntu_desktop; then
-  # http://www.omgubuntu.co.uk/2016/06/install-latest-arc-gtk-theme-ubuntu-16-04
-  # apt_keys+=(http://download.opensuse.org/repositories/home:Horst3180/xUbuntu_16.04/Release.key)
-  # apt_source_files+=(arc-theme)
-  # apt_source_texts+=("deb http://download.opensuse.org/repositories/home:/Horst3180/xUbuntu_16.04/ /")
-  # apt_packages+=(arc-theme)
 
   # https://github.com/tagplus5/vscode-ppa
   apt_keys+=(https://tagplus5.github.io/vscode-ppa/ubuntu/gpg.key)
   apt_source_files+=(vscode.list)
   apt_source_texts+=("deb https://tagplus5.github.io/vscode-ppa/ubuntu ./")
-  apt_packages+=(code code-insiders)
+  apt_packages+=(code)
 
   # https://www.ubuntuupdates.org/ppa/google_chrome
   apt_keys+=(https://dl-ssl.google.com/linux/linux_signing_key.pub)
@@ -84,6 +72,9 @@ if is_ubuntu_desktop; then
     shutter
     unity-tweak-tool
     vlc
+    zsh
+    fd-find
+    filezilla
   )
 
   # Manage online accounts via "gnome-control-center" in launcher
@@ -103,6 +94,7 @@ if is_ubuntu_desktop; then
   deb_sources+=("https://discordapp.com/api/download?platform=linux&format=deb")
 
 fi
+
 
 ####################
 # ACTUALLY DO THINGS
@@ -171,6 +163,12 @@ if (( ${#apt_packages[@]} > 0 )); then
     [[ "$(type -t postinstall_$package)" == function ]] && postinstall_$package
   done
 fi
+
+# Switch to zsh
+chsh -s $(which zsh)
+
+# Set Oh-My-Zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # Install debs via dpkg
 function __temp() { [[ ! -e "$1" ]]; }

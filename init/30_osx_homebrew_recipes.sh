@@ -7,11 +7,9 @@ is_osx || return 1
 # Homebrew recipes
 recipes=(
   ansible
-  awscli
   bash
   cmatrix
   coreutils
-  cowsay
   git
   git-extras
   htop
@@ -20,20 +18,12 @@ recipes=(
   jq
   lesspipe
   man2html
-  mercurial
   nmap
-  postgresql
-  powerline-go
   reattach-to-user-namespace
   sl
   smartmontools
   ssh-copy-id
-  telnet
   terminal-notifier
-  the_silver_searcher
-  thefuck
-  tmux
-  tmux-xpanes
   tree
   wget
 )
