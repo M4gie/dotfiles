@@ -72,7 +72,6 @@ if is_ubuntu_desktop; then
     geforcenow
     code
     shutter
-    chromium
     docker
     tree
     htop

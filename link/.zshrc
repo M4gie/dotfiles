@@ -10,7 +10,6 @@ source $ZSH/oh-my-zsh.sh
 
 alias ne='emacs -nw'
 
-alias fd="fdfind --hidden --ignore-case"
 
 # Where the magic happens.
 export DOTFILES=~/.dotfiles
