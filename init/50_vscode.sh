@@ -1,6 +1,6 @@
 
 # Link vscode configs
-mkdir -p ~/.dotfiles/.vscode/
+mkdir -p ~/.dotfiles/.vscode/User/
 ln -sf ~/.dotfiles/.vscode/keybindings.json ~/.config/Code/User/keybindings.json 
 ln -sf ~/.dotfiles/.vscode/settings.json ~/.config/Code/User/settings.json 
 ln -sf ~/.dotfiles/.vscode/snippets ~/.config/Code/User 
