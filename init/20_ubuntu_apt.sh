@@ -203,11 +203,3 @@ function install_from_zip() {
 
 # Run anything else that may need to be run.
 type -t other_stuff >/dev/null && other_stuff
-
-
-
-# Switch to zsh
-chsh -s $(which zsh)
-
-# Set Oh-My-Zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
