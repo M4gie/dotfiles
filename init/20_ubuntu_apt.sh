@@ -31,6 +31,7 @@ apt_packages+=(
   git-core
   python3-pip
   openjdk-8-jdk
+  virtualbox
 )
 
 if is_ubuntu_desktop; then
