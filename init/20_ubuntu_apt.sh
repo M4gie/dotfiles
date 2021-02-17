@@ -29,7 +29,7 @@ apt_packages+=(
   build-essential
   curl
   git-core
-  python-pip
+  python3-pip
   openjdk-8-jdk
 )
 

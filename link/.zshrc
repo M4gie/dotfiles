@@ -1,4 +1,6 @@
-export ZSH="/home/m4gie/.oh-my-zsh"
+export PATH=/bin:/usr/bin:/usr/local/bin:$HOME/bin:$HOME/.local/bin:$PATH
+
+export ZSH="/home/$USER/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
 
@@ -7,8 +9,6 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 alias ne='emacs -nw'
-
-alias kikimeter="git ls-files | xargs -n1 git blame --line-porcelain | sed -n 's/^author //p' | sort -f | uniq -ic | sort -nr"
 
 alias fd="fdfind --hidden --ignore-case"
 
