@@ -107,6 +107,10 @@ fi
 function __temp() { [[ ! -e /etc/apt/sources.list.d/$1.list ]]; }
 source_i=($(array_filter_i apt_source_files __temp))
 
+sudo add-apt-repository universe
+sudo add-apt-repository multiverse
+sudo add-apt-repository restricted
+
 if (( ${#source_i[@]} > 0 )); then
   e_header "Adding APT sources (${#source_i[@]})"
   for i in "${source_i[@]}"; do
@@ -160,15 +164,7 @@ if (( ${#snap_packages[@]} > 0 )); then
 fi
 
 # Install Docker Compose
-
 sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
-# Switch to zsh
-chsh -s $(which zsh)
-
-# Set Oh-My-Zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
 
 # Install debs via dpkg
 function __temp() { [[ ! -e "$1" ]]; }
@@ -207,3 +203,11 @@ function install_from_zip() {
 
 # Run anything else that may need to be run.
 type -t other_stuff >/dev/null && other_stuff
+
+
+
+# Switch to zsh
+chsh -s $(which zsh)
+
+# Set Oh-My-Zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
