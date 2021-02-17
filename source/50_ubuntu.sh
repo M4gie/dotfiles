@@ -13,8 +13,6 @@ function node_ver() {
     ver="${1#v}"
     nodes=()
     if [[ ! -e "/usr/local/src/node-v$ver" ]]; then
-      shopt -s extglob
-      shopt -s nullglob
       cd "/usr/local/src"
       eval 'for n in node-v*+([0-9]).+([0-9]).+([0-9]); do nodes=("${nodes[@]}" "${n#node-}"); done'
       [[ "$1" ]] && echo "Node.js version \"$1\" not found."
