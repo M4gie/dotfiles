@@ -1,9 +1,9 @@
 
 # Link vscode configs
-mkdir -p $HOME/.dotfiles/.vscode/
-ln -sf $HOME/.dotfiles/.vscode/keybindings.json ~/.config/Code/User/keybindings.json
-ln -sf $HOME/.dotfiles/.vscode/settings.json ~/.config/Code/User/settings.json
-ln -sf $HOME/.dotfiles/.vscode/snippets ~/.config/Code/User
+mkdir -p ~/.dotfiles/.vscode/
+ln -sf ~/.config/Code/User/keybindings.json ~/.dotfiles/.vscode/keybindings.json
+ln -sf ~/.config/Code/User/settings.json ~/.dotfiles/.vscode/settings.json
+ln -sf ~/.config/Code/User ~/.dotfiles/.vscode/snippets
 
 # You can see all your extensions in your teminal with code --list-extensions
 pkglist=(
