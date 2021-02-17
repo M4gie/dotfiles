@@ -32,6 +32,7 @@ apt_packages+=(
   python3-pip
   openjdk-8-jdk
   virtualbox
+  fonts-firacode
 )
 
 if is_ubuntu_desktop; then
