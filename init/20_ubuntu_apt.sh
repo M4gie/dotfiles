@@ -28,14 +28,10 @@ function add_ppa() {
 apt_packages+=(
   build-essential
   curl
-  docker-compose
   git-core
   python-pip
+  openjdk-8-jdk
 )
-
-# https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-16-04
-add_ppa ppa:ansible/ansible
-apt_packages+=(ansible)
 
 if is_ubuntu_desktop; then
 
@@ -45,23 +41,11 @@ if is_ubuntu_desktop; then
   apt_source_texts+=("deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main")
   apt_packages+=(google-chrome-stable)
 
-  # http://askubuntu.com/a/190674
-  add_ppa ppa:webupd8team/java
-  apt_packages+=(oracle-java8-installer)
-  function preinstall_oracle-java8-installer() {
-    echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
-    echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
-  }
-
   # Misc
   apt_packages+=(
-    fonts-mplus
-    gnome-tweak-tool
     openssh-server
-    unity-tweak-tool
     zsh
     fd-find
-    filezilla
   )
 
   # Manage online accounts via "gnome-control-center" in launcher
@@ -78,20 +62,20 @@ if is_ubuntu_desktop; then
 
 
   snap_packages+=(
-    "emacs --classic"
-    "discord"
-    "teams"
-    "telegram-desktop"
-    "postman"
-    "vlc"
-    "audacity"
-    "geforcenow"
-    "code --classic"
-    "shutter"
-    "chromium"
-    "docker"
-    "tree"
-    "htop"
+    emacs
+    discord
+    teams
+    telegram-desktop
+    postman
+    vlc
+    audacity
+    geforcenow
+    code
+    shutter
+    chromium
+    docker
+    tree
+    htop
   )
 fi
 
@@ -170,10 +154,14 @@ if (( ${#snap_packages[@]} > 0 )); then
   for package in "${snap_packages[@]}"; do
     echo "$package"
     [[ "$(type -t preinstall_$package)" == function ]] && preinstall_$package
-    sudo snap install "$package" && \
+    sudo snap install --classic "$package" && \
     [[ "$(type -t postinstall_$package)" == function ]] && postinstall_$package
   done
 fi
+
+# Install Docker Compose
+
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
 # Switch to zsh
 chsh -s $(which zsh)
