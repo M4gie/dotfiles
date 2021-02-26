@@ -12,7 +12,7 @@
   "json.schemas": [
     {
       "name": "vscode-expo-manifest",
-      "url": "file:///home/m4gie/.config/Code/User/globalStorage/bycedric.vscode-expo/manifest-40.0.0.json",
+      "url": "file:///home/maji/.config/Code/User/globalStorage/bycedric.vscode-expo/manifest-40.0.0.json",
       "fileMatch": [
         "app.json",
         "app.config.json"

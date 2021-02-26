@@ -33,6 +33,9 @@ apt_packages+=(
   openjdk-8-jdk
   virtualbox
   fonts-firacode
+  terminator
+  qbittorrent
+  wireguard
 )
 
 if is_ubuntu_desktop; then
