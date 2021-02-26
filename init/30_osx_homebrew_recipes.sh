@@ -6,24 +6,11 @@ is_osx || return 1
 
 # Homebrew recipes
 recipes=(
-  ansible
   bash
-  cmatrix
   coreutils
   git
   git-extras
   htop
-  hub
-  id3tool
-  jq
-  lesspipe
-  man2html
-  nmap
-  reattach-to-user-namespace
-  sl
-  smartmontools
-  ssh-copy-id
-  terminal-notifier
   tree
   wget
 )
