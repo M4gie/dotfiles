@@ -36,6 +36,7 @@ apt_packages+=(
   terminator
   qbittorrent
   wireguard
+  gparted
 )
 
 if is_ubuntu_desktop; then
