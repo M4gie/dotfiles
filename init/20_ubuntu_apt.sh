@@ -14,12 +14,6 @@ installers_path="$DOTFILES/caches/installers"
 # Ubuntu distro release name, eg. "xenial"
 release_name=$(lsb_release -c | awk '{print $2}')
 
-function add_ppa() {
-  apt_source_texts+=($1)
-  IFS=':/' eval 'local parts=($1)'
-  apt_source_files+=("${parts[1]}-ubuntu-${parts[2]}-$release_name")
-}
-
 #############################
 # WHAT DO WE NEED TO INSTALL?
 #############################
@@ -78,7 +72,6 @@ if is_ubuntu_desktop; then
     geforcenow
     code
     shutter
-    docker
     tree
     htop
   )
@@ -167,9 +160,6 @@ if (( ${#snap_packages[@]} > 0 )); then
     [[ "$(type -t postinstall_$package)" == function ]] && postinstall_$package
   done
 fi
-
-# Install Docker Compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
 # Install debs via dpkg
 function __temp() { [[ ! -e "$1" ]]; }
