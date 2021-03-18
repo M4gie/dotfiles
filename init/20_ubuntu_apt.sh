@@ -152,7 +152,7 @@ fi
 
 # Install Snap packages.
 if (( ${#snap_packages[@]} > 0 )); then
-  echo "Installing APT packages (${#snap_packages[@]})"
+  echo "Installing SNAP packages (${#snap_packages[@]})"
   for package in "${snap_packages[@]}"; do
     echo "$package"
     [[ "$(type -t preinstall_$package)" == function ]] && preinstall_$package
