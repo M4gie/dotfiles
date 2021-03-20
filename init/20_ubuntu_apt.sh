@@ -23,13 +23,6 @@ apt_packages+=(
   build-essential
   curl
   git-core
-  python3-pip
-  openjdk-8-jdk
-  virtualbox
-  fonts-firacode
-  terminator
-  qbittorrent
-  wireguard
   gparted
 )
 
@@ -62,17 +55,6 @@ if is_ubuntu_desktop; then
 
 
   snap_packages+=(
-    emacs
-    discord
-    teams
-    telegram-desktop
-    postman
-    vlc
-    audacity
-    geforcenow
-    code
-    shutter
-    tree
     htop
   )
 fi
