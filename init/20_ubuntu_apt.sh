@@ -39,6 +39,14 @@ if is_ubuntu_desktop; then
     openssh-server
     zsh
     fd-find
+    python3-pip
+    openjdk-8-jdk
+    virtualbox
+    fonts-firacode
+    terminator
+    qbittorrent
+    wireguard
+    ansible
   )
 
   # Manage online accounts via "gnome-control-center" in launcher
@@ -56,6 +64,16 @@ if is_ubuntu_desktop; then
 
   snap_packages+=(
     htop
+    emacs
+    discord
+    teams
+    telegram-desktop
+    postman
+    vlc
+    audacity
+    code
+    shutter
+    tree
   )
 fi
 
@@ -160,23 +178,12 @@ if (( ${#deb_installed_i[@]} > 0 )); then
   done
 fi
 
-# install bins from zip file
-function install_from_zip() {
-  local name=$1 url=$2 bins b zip tmp
-  shift 2; bins=("$@"); [[ "${#bins[@]}" == 0 ]] && bins=($name)
-  if [[ ! "$(which $name)" ]]; then
-    mkdir -p "$installers_path"
-    e_header "Installing $name"
-    zip="$installers_path/$(echo "$url" | sed 's#.*/##')"
-    wget -O "$zip" "$url"
-    tmp=$(mktemp -d)
-    unzip "$zip" -d "$tmp"
-    for b in "${bins[@]}"; do
-      sudo cp "$tmp/$b" "/usr/local/bin/$(basename $b)"
-    done
-    rm -rf $tmp
-  fi
-}
+# Edge
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main" > /etc/apt/sources.list.d/microsoft-edge-dev.list'
+sudo rm microsoft.gpg
+sudo apt update && sudo apt install microsoft-edge-beta
 
 # Run anything else that may need to be run.
 type -t other_stuff >/dev/null && other_stuff
