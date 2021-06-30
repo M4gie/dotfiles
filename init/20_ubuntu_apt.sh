@@ -47,6 +47,11 @@ if is_ubuntu_desktop; then
     qbittorrent
     wireguard
     ansible
+    htop
+    emacs
+    vlc
+    audacity
+    vscodium
   )
 
   # Manage online accounts via "gnome-control-center" in launcher
@@ -60,21 +65,6 @@ if is_ubuntu_desktop; then
   # function postinstall_vagrant() {
   #   sudo sed -i'' "s/Specification.all = nil/Specification.reset/" /usr/lib/ruby/vendor_ruby/vagrant/bundler.rb
   # }
-
-
-  snap_packages+=(
-    htop
-    emacs
-    discord
-    teams
-    telegram-desktop
-    postman
-    vlc
-    audacity
-    code
-    shutter
-    tree
-  )
 fi
 
 
@@ -146,17 +136,6 @@ if (( ${#apt_packages[@]} > 0 )); then
     e_arrow "$package"
     [[ "$(type -t preinstall_$package)" == function ]] && preinstall_$package
     sudo apt-get -qq install "$package" && \
-    [[ "$(type -t postinstall_$package)" == function ]] && postinstall_$package
-  done
-fi
-
-# Install Snap packages.
-if (( ${#snap_packages[@]} > 0 )); then
-  echo "Installing SNAP packages (${#snap_packages[@]})"
-  for package in "${snap_packages[@]}"; do
-    echo "$package"
-    [[ "$(type -t preinstall_$package)" == function ]] && preinstall_$package
-    sudo snap install --classic "$package" && \
     [[ "$(type -t postinstall_$package)" == function ]] && postinstall_$package
   done
 fi
